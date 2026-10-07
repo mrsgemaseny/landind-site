@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Ремонт компьютеров и IT-услуги в Шымкенте. Диагностика, настройка, госуслуги, удалённая помощь. Быстро, честно, оплата после результата.">
+  <title>IT-услуги в Шымкенте — ремонт и настройка компьютеров</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0A1628;
+      --bg-secondary: #0F2040;
+      --accent: #1E90FF;
+      --accent-secondary: #FFFFFF;
+      --text-body: #B8C8DC;
+      --card-bg: #0D1B31;
+      --border-color: rgba(30, 144, 255, 0.2);
+      --nav-border: rgba(30, 144, 255, 0.3);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      background-color: var(--bg-primary);
+      color: var(--text-body);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── NAV ─── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: var(--bg-primary);
+      border-bottom: 1px solid var(--nav-border);
+      transition: box-shadow 0.2s ease;
+    }
+
+    .nav.scrolled {
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--accent-secondary);
+      text-decoration: none;
+      letter-spacing: -0.3px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-body);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.15s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent-secondary);
+    }
+
+    .nav-links a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 3px;
+    }
+
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 36px;
+      height: 36px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      border-radius: 4px;
+    }
+
+    .nav-hamburger:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .nav-hamburger span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background-color: var(--text-body);
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .nav-hamburger.open span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .nav-hamburger.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .nav-hamburger.open span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    .nav-mobile {
+      display: none;
+      flex-direction: column;
+      background-color: var(--bg-primary);
+      border-top: 1px solid var(--border-color);
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.25s ease;
+    }
+
+    .nav-mobile.open {
+      max-height: 300px;
+    }
+
+    .nav-mobile a {
+      display: block;
+      padding: 14px 24px;
+      color: var(--text-body);
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 500;
+      border-bottom: 1px solid var(--border-color);
+      transition: color 0.15s ease, background-color 0.15s ease;
+    }
+
+    .nav-mobile a:hover {
+      color: var(--accent-secondary);
+      background-color: var(--bg-secondary);
+    }
+
+    .nav-mobile a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: -2px;
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      background-color: var(--bg-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 24px 60px;
+    }
+
+    .hero-content {
+      max-width: 800px;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .hero-content {
+        animation: heroFadeIn 0.5s ease forwards;
+        opacity: 0;
+      }
+
+      @keyframes heroFadeIn {
+        from { opacity: 0; }
+        to   { opacity: 1; }
+      }
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.06em;
+      margin-bottom: 20px;
+      position: relative;
+      padding-left: 20px;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 12px;
+      height: 2px;
+      background-color: var(--accent);
+    }
+
+    .hero h1 {
+      font-size: clamp(36px, 5vw, 58px);
+      font-weight: 700;
+      color: var(--accent-secondary);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 .accent-word {
+      position: relative;
+      display: inline-block;
+      padding-bottom: 4px;
+    }
+
+    .hero h1 .accent-word::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 2px;
+      background-color: var(--accent);
+    }
+
+    .hero-sub {
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--text-body);
+      max-width: 560px;
+      margin: 0 auto 36px;
+      line-height: 1.65;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      padding: 14px 28px;
+      background-color: var(--accent);
+      color: var(--accent-secondary);
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 5px;
+      border: 2px solid var(--accent);
+      transition: background-color 0.15s ease, color 0.15s ease;
+    }
+
+    .btn-primary:hover {
+      background-color: #1478d8;
+      border-color: #1478d8;
+    }
+
+    .btn-primary:focus-visible {
+      outline: 2px solid var(--accent-secondary);
+      outline-offset: 3px;
+    }
+
+    .btn-secondary {
+      display: inline-block;
+      padding: 14px 28px;
+      background-color: transparent;
+      color: var(--accent);
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 5px;
+      border: 2px solid var(--accent);
+      transition: background-color 0.15s ease, color 0.15s ease;
+    }
+
+    .btn-secondary:hover {
+      background-color: rgba(30, 144, 255, 0.1);
+    }
+
+    .btn-secondary:focus-visible {
+      outline: 2px solid var(--accent-secondary);
+      outline-offset: 3px;
+    }
+
+    .hero-hours {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-body);
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 6px 16px;
+    }
+
+    /* ─── SECTION SHARED ─── */
+    .section {
+      padding: 88px 24px;
+    }
+
+    .section--alt {
+      background-color: var(--bg-secondary);
+    }
+
+    .section-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-heading {
+      font-size: clamp(26px, 3.5vw, 38px);
+      font-weight: 700;
+      color: var(--accent-secondary);
+      margin-bottom: 52px;
+      letter-spacing: -0.02em;
+    }
+
+    /* ─── SERVICES ─── */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .service-card {
+      background-color: var(--card-bg);
+      border-left: 2px solid var(--accent);
+      border-radius: 4px;
+      padding: 24px;
+    }
+
+    .service-icon {
+      font-size: 28px;
+      line-height: 1;
+      margin-bottom: 14px;
+      display: block;
+    }
+
+    .service-name {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--accent-secondary);
+      margin-bottom: 8px;
+    }
+
+    .service-desc {
+      font-size: 14px;
+      color: var(--text-body);
+      line-height: 1.55;
+      margin-bottom: 14px;
+    }
+
+    .service-price {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--accent);
+    }
+
+    /* ─── HOW IT WORKS ─── */
+    .steps-row {
+      display: flex;
+      gap: 0;
+      align-items: flex-start;
+    }
+
+    .step {
+      flex: 1;
+      padding: 0 28px 0 0;
+      position: relative;
+    }
+
+    .step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 22px;
+      right: 0;
+      width: 28px;
+      height: 1px;
+      border-top: 2px dotted var(--border-color);
+    }
+
+    .step-num {
+      width: 44px;
+      height: 44px;
+      border-radius: 4px;
+      background-color: transparent;
+      border: 2px solid var(--accent);
+      color: var(--accent);
+      font-size: 18px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      flex-shrink: 0;
+    }
+
+    .step-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--accent-secondary);
+      margin-bottom: 8px;
+    }
+
+    .step-desc {
+      font-size: 14px;
+      color: var(--text-body);
+      line-height: 1.55;
+    }
+
+    /* ─── WHY ME ─── */
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .trust-item {
+      padding: 28px 32px;
+      background-color: var(--card-bg);
+      border-radius: 4px;
+      border: 1px solid var(--border-color);
+    }
+
+    .trust-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--accent-secondary);
+      margin-bottom: 8px;
+    }
+
+    .trust-desc {
+      font-size: 14px;
+      color: var(--text-body);
+      line-height: 1.55;
+    }
+
+    /* ─── CONTACTS ─── */
+    .contacts-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    .contacts-block {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .contact-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .contact-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+    }
+
+    .contact-value {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--accent-secondary);
+      text-decoration: none;
+    }
+
+    .contact-value:hover {
+      color: var(--accent);
+    }
+
+    .contact-value:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    .contact-value--plain {
+      color: var(--text-body);
+      font-weight: 400;
+    }
+
+    .map-wrapper {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+
+    .map-wrapper iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+
+    /* ─── FOOTER ─── */
+    .footer {
+      background-color: var(--bg-primary);
+      border-top: 1px solid var(--border-color);
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 24px;
+    }
+
+    .footer p {
+      font-size: 13px;
+      color: var(--text-body);
+      text-align: center;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 1023px) {
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .steps-row {
+        flex-direction: column;
+        gap: 32px;
+      }
+
+      .step {
+        padding: 0;
+      }
+
+      .step:not(:last-child)::after {
+        display: none;
+      }
+
+      .contacts-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .map-wrapper {
+        aspect-ratio: 16 / 9;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav-links {
+        display: none;
+      }
+
+      .nav-hamburger {
+        display: flex;
+      }
+
+      .nav-mobile {
+        display: flex;
+      }
+
+      .section {
+        padding: 64px 20px;
+      }
+
+      .hero {
+        padding: 60px 20px 48px;
+        text-align: left;
+        align-items: flex-start;
+      }
+
+      .hero-content {
+        text-align: left;
+      }
+
+      .hero-ctas {
+        justify-content: flex-start;
+      }
+
+      .hero-sub {
+        margin-left: 0;
+        margin-right: 0;
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .trust-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section-heading {
+        margin-bottom: 36px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav" role="navigation" aria-label="Основная навигация">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo">IT-услуги Шымкент</a>
+      <ul class="nav-links" role="list">
+        <li><a href="#services">Услуги</a></li>
+        <li><a href="#how">Как работаю</a></li>
+        <li><a href="#why">О себе</a></li>
+        <li><a href="#contacts">Контакты</a></li>
+      </ul>
+      <button class="nav-hamburger" id="hamburger" aria-label="Открыть меню" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div class="nav-mobile" id="mobile-menu" role="menu">
+      <a href="#services" role="menuitem">Услуги</a>
+      <a href="#how" role="menuitem">Как работаю</a>
+      <a href="#why" role="menuitem">О себе</a>
+      <a href="#contacts" role="menuitem">Контакты</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero" aria-label="Главный экран">
+    <div class="hero-content">
+      <span class="hero-eyebrow">Шымкент — выезд и работа в офисе</span>
+      <h1>Ремонт компьютеров и <span class="accent-word">IT-услуги</span> в Шымкенте</h1>
+      <p class="hero-sub">Диагностика, настройка, открытие аккаунтов и госуслуги — быстро и без лишних вопросов</p>
+      <div class="hero-ctas">
+        <a href="tel:+77000000000" class="btn-primary">Позвонить</a>
+        <a href="https://wa.me/77000000000" class="btn-secondary" target="_blank" rel="noopener noreferrer">Написать в WhatsApp</a>
+      </div>
+      <span class="hero-hours">Пн–Пт 10:00–19:00 &nbsp;|&nbsp; Сб 11:00–17:00</span>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="section section--alt" id="services" aria-labelledby="services-heading">
+    <div class="section-inner">
+      <h2 class="section-heading" id="services-heading">Что я делаю</h2>
+      <div class="services-grid">
+
+        <article class="service-card">
+          <span class="service-icon" aria-hidden="true">&#128296;</span>
+          <h3 class="service-name">Ремонт компьютеров</h3>
+          <p class="service-desc">Диагностика неисправностей, замена комплектующих, нанесение термопасты, чистка от пыли, апгрейд оборудования.</p>
+          <span class="service-price">Уточняйте цену</span>
+        </article>
+
+        <article class="service-card">
+          <span class="service-icon" aria-hidden="true">&#128187;</span>
+          <h3 class="service-name">Настройка ноутбука и ПК</h3>
+          <p class="service-desc">Установка операционной системы, драйверов и начальная настройка нового устройства — готово к работе с первого дня.</p>
+          <span class="service-price">от 3 000 ₸</span>
+        </article>
+
+        <article class="service-card">
+          <span class="service-icon" aria-hidden="true">&#128100;</span>
+          <h3 class="service-name">Создание аккаунтов</h3>
+          <p class="service-desc">Регистрация почты, социальных сетей, маркетплейсов и приложений — помогу разобраться и всё оформить.</p>
+          <span class="service-price">от 1 000 ₸</span>
+        </article>
+
+        <article class="service-card">
+          <span class="service-icon" aria-hidden="true">&#127979;</span>
+          <h3 class="service-name">Государственные цифровые услуги</h3>
+          <p class="service-desc">Работа с eGov.kz, получение ЭЦП и сертификатов НУЦ РК, налоговый кабинет, пенсионный портал.</p>
+          <span class="service-price">от 2 000 ₸</span>
+        </article>
+
+        <article class="service-card">
+          <span class="service-icon" aria-hidden="true">&#128190;</span>
+          <h3 class="service-name">Установка программ</h3>
+          <p class="service-desc">Лицензионный и бесплатный софт, антивирусы, браузеры, офисные пакеты и другие программы для работы и учёбы.</p>
+          <span class="service-price">от 1 500 ₸</span>
+        </article>
+
+        <article class="service-card">
+          <span class="service-icon" aria-hidden="true">&#128225;</span>
+          <h3 class="service-name">Удалённая помощь</h3>
+          <p class="service-desc">Онлайн-помощь через AnyDesk или TeamViewer — решаю задачи без вашего визита, для клиентов из других районов.</p>
+          <span class="service-price">от 2 000 ₸</span>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section" id="how" aria-labelledby="how-heading">
+    <div class="section-inner">
+      <h2 class="section-heading" id="how-heading">Как это работает</h2>
+      <div class="steps-row">
+
+        <div class="step">
+          <div class="step-num" aria-hidden="true">1</div>
+          <h3 class="step-title">Опишите проблему</h3>
+          <p class="step-desc">Позвоните или напишите — я отвечаю в течение часа в рабочее время. Кратко расскажите, что случилось, этого достаточно.</p>
+        </div>
+
+        <div class="step">
+          <div class="step-num" aria-hidden="true">2</div>
+          <h3 class="step-title">Приходите или вызывайте</h3>
+          <p class="step-desc">Работаю по адресу в Шымкенте или могу выехать к вам. Выберите удобный формат — согласуем время.</p>
+        </div>
+
+        <div class="step">
+          <div class="step-num" aria-hidden="true">3</div>
+          <h3 class="step-title">Получите результат</h3>
+          <p class="step-desc">Оплата только после выполнения работы. Объясняю что было сделано — без технического жаргона, если он не нужен.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY ME -->
+  <section class="section section--alt" id="why" aria-labelledby="why-heading">
+    <div class="section-inner">
+      <h2 class="section-heading" id="why-heading">Почему обращаются ко мне</h2>
+      <div class="trust-grid">
+
+        <div class="trust-item">
+          <h3 class="trust-title">Честная диагностика</h3>
+          <p class="trust-desc">Скажу, что реально сломано, и не буду придумывать лишних проблем. Если устройство не требует ремонта — так и скажу.</p>
+        </div>
+
+        <div class="trust-item">
+          <h3 class="trust-title">Оплата после результата</h3>
+          <p class="trust-desc">Не беру деньги до завершения работы. Если не смог решить задачу — не платите.</p>
+        </div>
+
+        <div class="trust-item">
+          <h3 class="trust-title">Объясняю понятно</h3>
+          <p class="trust-desc">Без технического жаргона, если он не нужен. Расскажу понятно, что случилось и что было сделано.</p>
+        </div>
+
+        <div class="trust-item">
+          <h3 class="trust-title">Быстро отвечаю</h3>
+          <p class="trust-desc">В рабочие часы — отвечаю в течение 1 часа. Не держу клиента в неведении без ответа.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTS -->
+  <section class="section" id="contacts" aria-labelledby="contacts-heading">
+    <div class="section-inner">
+      <h2 class="section-heading" id="contacts-heading">Контакты</h2>
+      <div class="contacts-layout">
+
+        <div class="contacts-block">
+          <div class="contact-item">
+            <span class="contact-label">Телефон</span>
+            <a href="tel:+77000000000" class="contact-value">+7 (700) 000-00-00</a>
+          </div>
+          <div class="contact-item">
+            <span class="contact-label">WhatsApp</span>
+            <a href="https://wa.me/77000000000" class="contact-value" target="_blank" rel="noopener noreferrer">+7 (700) 000-00-00</a>
+          </div>
+          <div class="contact-item">
+            <span class="contact-label">Адрес</span>
+            <span class="contact-value contact-value--plain">г. Шымкент, ул. Байтурсынова, 12</span>
+          </div>
+          <div class="contact-item">
+            <span class="contact-label">Время работы</span>
+            <span class="contact-value contact-value--plain">Пн–Пт 10:00–19:00</span>
+            <span class="contact-value contact-value--plain">Сб 11:00–17:00</span>
+          </div>
+        </div>
+
+        <div class="map-wrapper">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d47978.41!2d69.5597!3d42.3417!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38931fcbb34ea7fd%3A0x2f6e9d89ff30f4ac!2z0KjRi9C80LrQtdC90YIsINCa0LDQt9Cw0YXRgdGC0LDQvQ!5e0!3m2!1sru!2skz!4v1700000000000"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Карта — г. Шымкент"
+            aria-label="Карта расположения в городе Шымкент">
+          </iframe>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer" role="contentinfo">
+    <p>© 2025 IT-услуги Шымкент. Все права защищены.</p>
+  </footer>
+
+  <script>
+    // ─── NAV: scroll shadow ───
+    const nav = document.getElementById('nav');
+
+    window.addEventListener('scroll', function () {
+      if (window.scrollY > 80) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    }, { passive: true });
+
+    // ─── HAMBURGER MENU ───
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    hamburger.addEventListener('click', function () {
+      const isOpen = hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open', isOpen);
+      hamburger.setAttribute('aria-expanded', String(isOpen));
+      hamburger.setAttribute('aria-label', isOpen ? 'Закрыть меню' : 'Открыть меню');
+    });
+
+    // Close mobile menu when a link is clicked
+    mobileMenu.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        hamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        hamburger.setAttribute('aria-label', 'Открыть меню');
+      });
+    });
+
+    // Close mobile menu on outside click
+    document.addEventListener('click', function (e) {
+      if (!nav.contains(e.target)) {
+        hamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        hamburger.setAttribute('aria-label', 'Открыть меню');
+      }
+    });
+  </script>
+
+</body>
+</html>
